@@ -1,0 +1,33 @@
+---
+title: "Workshop: Deploy"
+author: "<img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '20%'>"
+date: "2020-06-20"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: "css/xaringan-themer.css"
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r, include=FALSE, warning=FALSE, message=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(comment = "#>", echo=TRUE, fig.align='center')
+```
+
+# O que você vai aprender
+
+- O que é uma API
+
+- Como utilizar o pacote plumber
+
+- O que é um contêiner docker
+
+- O que é uma máquina virtual
+
+- O que é uma implantação de imagem
+
+- Como automatizar o deploy de um dashboard
