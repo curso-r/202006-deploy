@@ -30,12 +30,26 @@ class: center, middle, inverse, title-slide
 
 - O que é docker
 
-- Como empacotar um shiny
+- Como empacotar um dashboard
 
-- Como automatizar o deploy de um dashboard
+- O pacote `{golem}`
+
+- Como automatizar um deploy
 
 ---
-# Está tudo instalado?
+# Está tudo preparado?
+
+- Conta Google
+
+- Cadastro no Google Cloud
+
+- Conta GitHub
+
+- Conta Docker Hub
+
+- Instalação R e RStudio
+
+- Instalação `{plumber}`, `{tidyverse}`, `{golem}`
 
 ---
 # O que significa "deploy"?
@@ -124,7 +138,7 @@ resposta
 
 ```
 #&gt; Response [https://pokeapi.co/api/v2/pokemon/ditto]
-#&gt;   Date: 2020-06-19 03:05
+#&gt;   Date: 2020-06-19 20:02
 #&gt;   Status: 200
 #&gt;   Content-Type: application/json; charset=utf-8
 #&gt;   Size: 10.4 kB
@@ -376,7 +390,7 @@ FROM trestletech/plumber
 
 COPY exemplo_api.R /
 
-EXPOSE 8000
+EXPOSE 8000/tcp
 CMD ["/exemplo_api.R"]
 ```
 
@@ -402,6 +416,26 @@ docker build -t exemplo .
 
 docker run -p 8000:8000 --rm exemplo
 ```
+
+---
+# Implantação contínua
+
+&gt; Em engenharia de software, CI/CD refere-se genericamente à combinação das
+práticas de integração contínua (CI) e implantação contínua (CD)
+
+- Dado um certo código e um método consistente de implantá-lo, faz todo sentido
+**automatizar** o proceso
+
+- Implantação contínua normalmente envolve transferir a versão mais
+recente/**estável** do software e colocá-la em produção
+
+  - O CD de um serviço encapsulado em Docker necessita automatizar o **build**
+
+  - Existe uma série de serviços que detectam uma nova versão de um
+  **repositório** e automaticamente criam atualizam a sua imagem
+
+- Hoje famos falar sobre o **Google Cloud Build** porque ele se conecta em
+outros serviços que vamos usar
 
 ---
 # Shiny empacotado
