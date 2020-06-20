@@ -20,7 +20,42 @@ class: center, middle, inverse, title-slide
 
 
 
+class: inverse, center, middle
+# Prólogo
+
+---
+# Curso-R
+
+&lt;img src="static/nos.png" width="754" style="display: block; margin: auto;" /&gt;
+
+---
+# Linha do tempo
+
+&lt;img src="static/cursor.png" width="374" style="display: block; margin: auto;" /&gt;
+
+---
+# Sobre o curso
+
+- Alguns lembretes:
+  
+  - O curso ocorre das **9:00 às 18:00**
+  
+  - Teremos uma hora de almoço entre **12:00 e 13:00** aproximadamente
+  
+  - Teremos um intervalo durante o **teste de incêndio**
+
+- Algumas sugestões:
+  
+  - O curso é longo, então reserve **água e comida** para não cansar
+  
+  - **Lave as mãos** sempre que puder e fique em casa
+  
+  - Levante para se **alongar** regularmente durante a aula
+
+---
 # Na aula de hoje
+
+- O que é deploy (implantação)
 
 - O que é uma API
 
@@ -50,6 +85,10 @@ class: center, middle, inverse, title-slide
 - Instalação R e RStudio
 
 - Instalação `{plumber}`, `{tidyverse}`, `{golem}`
+
+---
+class: inverse, center, middle
+# Introdução
 
 ---
 # O que significa "deploy"?
@@ -89,6 +128,10 @@ técnicas simples e complexos
   - **Objetivo**: ter um endereço fixo que, quando acessado, exibe o dashboard
   
   - **Implantação**: servir o dashboard em uma máquina remota
+
+---
+class: inverse, center, middle
+# APIs
 
 ---
 # O que é uma API?
@@ -138,7 +181,7 @@ resposta
 
 ```
 #&gt; Response [https://pokeapi.co/api/v2/pokemon/ditto]
-#&gt;   Date: 2020-06-19 20:02
+#&gt;   Date: 2020-06-20 00:50
 #&gt;   Status: 200
 #&gt;   Content-Type: application/json; charset=utf-8
 #&gt;   Size: 10.4 kB
@@ -310,6 +353,10 @@ content(resp)[[1]]
 `#&gt; [1] 6`
 
 ---
+class: inverse, center, middle
+# Docker
+
+---
 # O que é Docker?
 
 &gt; Docker é uma _platform as a service_ (PaaS) que usa virtualização de sistemas
@@ -438,22 +485,336 @@ recente/**estável** do software e colocá-la em produção
 outros serviços que vamos usar
 
 ---
+class: inverse, center, middle
+# Deploy
+
+---
+# Google Cloud Platform
+
+&gt; Google Cloud Platform (GCP) é um conjunto de serviços na núvem, incluindo
+processamento, armazenamento, analytics e machine learning
+
+- A "**núvem**" é um nome bonito para uma coleção de armazéns ao redor do mundo com
+computadores que podem ser alugados
+
+  - Um **servidor** é um computador com um programa que o permite receber
+  requisições de outros computadores
+  
+  - Um **site** é um conjunto de código sendo servido em um servidor, que pode
+  ser convertido para uma página visual
+  
+- A Google oferece sua **infraestrutura** para ser alugada por usuários comuns
+
+  - O GCP é a plataforma onde podemos controlar esses recursos sem nos
+  preocuparmos com a **manutenção** do hardware e do software
+
+---
+# Exemplo de CD no CGP
+
+1. Menu Lateral
+
+1. Cloud Build
+
+1. **Acionadores**
+
+1. Conectar repositório
+
+1. GitHub
+
+1. Criar **gatilho**
+
+1. Editar gatilho
+
+1. Verificar progresso
+
+1. Garantir sucesso
+
+---
+# Exemplo de deploy no CGP
+
+1. Menu Lateral
+
+1. IAM e administrador
+
+1. Contas de **serviço**
+
+1. Criar conta de serviço
+
+1. Administrador do **Storage** + Administrador do **Compute**
+
+1. Menu Lateral
+
+1. Google Compute Engine
+
+1. Criar **instância**
+
+1. Implante uma **imagem** de contêiner nesta instância de VM
+
+---
+# Exemplo de deploy no CGP (cont.)
+
+1. Menu Lateral
+
+1. Rede VPC
+
+1. Firewall
+
+1. Criar regra de **firewall**
+
+1. Intervalos de IP de origem: **0.0.0.0/0**
+
+1. Menu Lateral
+
+1. Rede VPC
+
+1. Endereços **IP externos**
+
+1. Tipo: Temporário &gt; **Estático**
+
+---
+# Testando um deploy
+
+&gt; DevOps (desenvolvimento + operações de TI) tem por objetivo acelerar o cíclo
+de desenvolvimento e prover CD com software de alta qualidade
+
+- Depois que o deploy estiver pronto (máquina virtual rodando, configurações
+realizadas) é essencial testar
+
+- Em um ambiente corporativo em que os riscos são altos, os testes precisam
+ocorrer **antes** do deploy
+
+- Muitas vezes é vital ter um **ambiente de testes** bem configurado que simule
+todos os problemas pelo qual o programa pode passar
+
+  - Estamos usando a metodologia **XGH**, então testamos só depois de implantar
+
+- Alguns testes: corretude, carga, responsividade, etc.
+
+---
+# Testando a API
+
+
+```r
+params &lt;- list(msg = "Testado!")
+resp &lt;- GET("http://34.66.246.102:8000/echo", query = params)
+
+content(resp)[[1]]
+```
+
+```
+#&gt; [1] "A mensagem é: 'Testado!'"
+```
+
+
+```r
+params &lt;- list(a = 2, b = 6)
+resp &lt;- POST("http://34.66.246.102:8000/sum", body = params, encode = "json")
+
+content(resp)[[1]]
+```
+
+```
+#&gt; [1] 8
+```
+
+- Ainda seria possível associar um domínio a esses IPs, mas isso (configuração
+de CDN) foge do tópico da aula de hoje
+
+---
+class: inverse, center, middle
+# Shiny
+
+---
 # Shiny empacotado
+
+- Apps começam com uma ideia simples, mas vão **crescendo** até o ponto que não
+conseguimos mais entender onde estão os seus pedaços
+
+- Com **módulos**, é possível separar pedaços de um shiny em scripts separados, que
+são adicionados como funções dentro do app principal
+
+  - Um módulo pode usar funções de certo pacote, e às vezes esquecemos de checar
+  se ele está instalado quando o app for colocado em produção
+
+- Uma alternativa muito útil é desenvolver o shiny dentro de um **pacote**
+
+  - As **dependências** são checadas automaticamente
+  
+  - Os módulos se tornam **funções** do pacote
+  
+  - Tudo deve ficar **documentado** e organizado por padrão
 
 ---
 # O pacote {golem}
 
----
-# Google Cloud
+&gt; `{golem}` é um framework opinionado para construir aplicações shiny prontas
+para produção https://engineering-shiny.org
+
+- O `{golem}` cria **templates** estruturadas que facilitam o desenvolvimento,
+configuração, manutenção e implantação de um dashboard shiny
+
+  - A template é um **pacote** R, importante pelos motivos destacados antes
+  
+  - Contém uma coleção de funções que **aceleram** tarefas repetitivas
+  
+  - Possui diversos **atalhos** para criar arquivos comuns
+  
+  - Traz funções que automatizam a preparação para o **deploy**
+
+- Eu pessoalmente acho a template muito carregada, mas muita gente gosta
 
 ---
-# Compute Engine
+# Exemplo de {golem}
+
+- A função `create_golem()` cria um projeto-pacote com toda a estrutura
+
+  - `R/` deve conter as funções, `dev/` ajuda a montar o shiny e `inst/` fica
+  com os recursos auxiliares
+
+
+```r
+library(golem)
+
+create_golem("arqs/exemplo_shiny/", package_name = "exemplo")
+```
+
+- O primeiro passo é passar pelo arquivo `dev/01_start.R` para configurar o app
+
+- O segundo é desenvolver o app (`dev/02_dev.R` pode ajudar)
+
+- O último passo é criar a estrutura para deploy com `dev/03_deploy.R`
+
+  - Nunca esquecer de instalar o app e testar com `exemplo::run_app()`
 
 ---
-# Firewall
+
+
+```
+#&gt; ../arqs/exemplo_shiny/
+#&gt; ├── DESCRIPTION
+#&gt; ├── Dockerfile
+#&gt; ├── NAMESPACE
+#&gt; ├── R
+#&gt; │   ├── app_config.R
+#&gt; │   ├── app_server.R
+#&gt; │   ├── app_ui.R
+#&gt; │   └── run_app.R
+#&gt; ├── dev
+#&gt; │   ├── 01_start.R
+#&gt; │   ├── 02_dev.R
+#&gt; │   ├── 03_deploy.R
+#&gt; │   └── run_dev.R
+#&gt; ├── exemplo_shiny.Rproj
+#&gt; └── inst
+#&gt;     ├── app
+#&gt;     │   └── www
+#&gt;     │       └── favicon.ico
+#&gt;     └── golem-config.yml
+```
 
 ---
-# IP estático
+class: inverse, center, middle
+# Deploy II
+
+---
+# Preparação para deploy
+
+- Como o shiny é um pacote, podemos seguir os passos de **desenvolvimento** de
+pacotes antes de colocá-lo em produção
+
+  - Rodar `devtools::check()` para garantir que tudo está **em ordem**
+
+  - **Instalar** o app com `devtools::install()`
+  
+  - **Executar o app** em uma sessão limpa com `exemplo::run_app()`
+
+- Quando o shiny estiver pronto, adicionar um **Dockerfile** com `add_dockerfile()`
+
+  - O Dockerfile **não é otimizado** para o Google Cloud e isso pode implicar em
+  alguns problemas
+  
+  - Quando necessário, edite o Dockerfile para **adequá-lo** ao ambiente real
+  onde ele será implantado
+
+---
+
+
+```r
+add_dockerfile()
+```
+
+```{}
+FROM rocker/r-ver:4.0.1
+RUN apt-get update &amp;&amp; apt-get install -y  git-core libcurl4-openssl-dev libgit2-dev libssh2-1-dev libssl-dev libxml2-dev make pandoc pandoc-citeproc zlib1g-dev &amp;&amp; rm -rf /var/lib/apt/lists/*
+RUN echo "options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl')" &gt;&gt; /usr/local/lib/R/etc/Rprofile.site
+RUN R -e 'install.packages("remotes")'
+RUN R -e 'remotes::install_github("r-lib/remotes", ref = "97bbf81")'
+RUN Rscript -e 'remotes::install_version("config",upgrade="never", version = "0.3")'
+RUN Rscript -e 'remotes::install_version("golem",upgrade="never", version = "0.2.1")'
+RUN Rscript -e 'remotes::install_version("shiny",upgrade="never", version = "1.4.0.2")'
+RUN Rscript -e 'remotes::install_version("attempt",upgrade="never", version = "0.3.1")'
+RUN Rscript -e 'remotes::install_version("DT",upgrade="never", version = "0.13")'
+RUN Rscript -e 'remotes::install_version("glue",upgrade="never", version = "1.4.1")'
+RUN Rscript -e 'remotes::install_version("htmltools",upgrade="never", version = "0.5.0")'
+RUN mkdir /build_zone
+ADD . /build_zone
+WORKDIR /build_zone
+RUN R -e 'remotes::install_local(upgrade="never")'
+EXPOSE 80
+CMD R -e "options('shiny.port'=80,shiny.host='0.0.0.0');exemplo::run_app()"
+```
+
+---
+# Exemplo de CD no CGP
+
+1. Menu Lateral
+
+1. Cloud Build
+
+1. **Acionadores**
+
+1. Conectar repositório
+
+1. GitHub
+
+1. Criar **gatilho**
+
+1. Editar gatilho
+
+1. Verificar progresso
+
+1. Garantir sucesso
+
+---
+# Exemplo de deploy no CGP
+
+1. Menu Lateral
+
+1. Google Compute Engine
+
+1. Criar **instância**
+
+1. Implante uma **imagem** de contêiner nesta instância de VM
+
+1. Menu Lateral
+
+1. Rede VPC
+
+1. Endereços **IP externos**
+
+1. Tipo: Temporário &gt; **Estático**
+
+---
+# Testando o shiny
+
+- Navegar para o link correpondente ao IP: http://34.66.246.102
+
+  - A porta 80 é a padrão para o tráfego HTTP, então não há necessidade de
+  especificar nada
+
+---
+class: inverse, center, middle
+# Fim!
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
