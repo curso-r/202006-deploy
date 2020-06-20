@@ -209,7 +209,7 @@ knitr::include_graphics("static/nasaapi.png")
 ```{r}
 params <- list(
   date = "2019-12-31",
-  api_key = NASA_KEY # Guardada no meu computaodr
+  api_key = NASA_KEY # Guardada no meu computador
 )
 
 resp <- GET("https://api.nasa.gov/planetary/apod", query = params)
@@ -460,7 +460,7 @@ docker run -p 8000:8000 --rm exemplo
 práticas de integração contínua (CI) e implantação contínua (CD)
 
 - Dado um certo código e um método consistente de implantá-lo, faz todo sentido
-**automatizar** o proceso
+**automatizar** o processo
 
 - Implantação contínua normalmente envolve transferir a versão mais
 recente/**estável** do software e colocá-la em produção
@@ -470,7 +470,7 @@ recente/**estável** do software e colocá-la em produção
   - Existe uma série de serviços que detectam uma nova versão de um
   **repositório** e automaticamente criam atualizam a sua imagem
 
-- Hoje famos falar sobre o **Google Cloud Build** porque ele se conecta em
+- Hoje vamos falar sobre o **Google Cloud Build** porque ele se conecta em
 outros serviços que vamos usar
 
 ---
@@ -480,10 +480,10 @@ class: inverse, center, middle
 ---
 # Google Cloud Platform
 
-> Google Cloud Platform (GCP) é um conjunto de serviços na núvem, incluindo
+> Google Cloud Platform (GCP) é um conjunto de serviços na nuvem, incluindo
 processamento, armazenamento, analytics e machine learning
 
-- A "**núvem**" é um nome bonito para uma coleção de armazéns ao redor do mundo com
+- A "**nuvem**" é um nome bonito para uma coleção de armazéns ao redor do mundo com
 computadores que podem ser alugados
 
   - Um **servidor** é um computador com um programa que o permite receber
@@ -563,7 +563,7 @@ computadores que podem ser alugados
 ---
 # Testando um deploy
 
-> DevOps (desenvolvimento + operações de TI) tem por objetivo acelerar o cíclo
+> DevOps (desenvolvimento + operações de TI) tem por objetivo acelerar o ciclo
 de desenvolvimento e prover CD com software de alta qualidade
 
 - Depois que o deploy estiver pronto (máquina virtual rodando, configurações
@@ -764,10 +764,14 @@ CMD R -e "options('shiny.port'=80,shiny.host='0.0.0.0');exemplo::run_app()"
 ---
 # Testando o shiny
 
-- Navegar para o link correpondente ao IP: http://34.66.246.102
+- **Navegar** para o link correpondente ao IP: http://104.198.249.27
 
-  - A porta 80 é a padrão para o tráfego HTTP, então não há necessidade de
+  - A **porta 80** é a padrão para o tráfego HTTP, então não há necessidade de
   especificar nada
+
+```{r, echo=FALSE, fig.align='center', dpi=160}
+knitr::include_graphics("static/shiny.png")
+```
 
 ---
 class: inverse, center, middle

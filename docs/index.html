@@ -183,7 +183,7 @@ resposta
 
 ```
 #&gt; Response [https://pokeapi.co/api/v2/pokemon/ditto]
-#&gt;   Date: 2020-06-20 00:52
+#&gt;   Date: 2020-06-20 01:42
 #&gt;   Status: 200
 #&gt;   Content-Type: application/json; charset=utf-8
 #&gt;   Size: 10.4 kB
@@ -217,7 +217,7 @@ content(resposta)$moves[[1]]$move$name
 ```r
 params &lt;- list(
   date = "2019-12-31",
-  api_key = NASA_KEY # Guardada no meu computaodr
+  api_key = NASA_KEY # Guardada no meu computador
 )
 
 resp &lt;- GET("https://api.nasa.gov/planetary/apod", query = params)
@@ -473,7 +473,7 @@ docker run -p 8000:8000 --rm exemplo
 práticas de integração contínua (CI) e implantação contínua (CD)
 
 - Dado um certo código e um método consistente de implantá-lo, faz todo sentido
-**automatizar** o proceso
+**automatizar** o processo
 
 - Implantação contínua normalmente envolve transferir a versão mais
 recente/**estável** do software e colocá-la em produção
@@ -483,7 +483,7 @@ recente/**estável** do software e colocá-la em produção
   - Existe uma série de serviços que detectam uma nova versão de um
   **repositório** e automaticamente criam atualizam a sua imagem
 
-- Hoje famos falar sobre o **Google Cloud Build** porque ele se conecta em
+- Hoje vamos falar sobre o **Google Cloud Build** porque ele se conecta em
 outros serviços que vamos usar
 
 ---
@@ -493,10 +493,10 @@ class: inverse, center, middle
 ---
 # Google Cloud Platform
 
-&gt; Google Cloud Platform (GCP) é um conjunto de serviços na núvem, incluindo
+&gt; Google Cloud Platform (GCP) é um conjunto de serviços na nuvem, incluindo
 processamento, armazenamento, analytics e machine learning
 
-- A "**núvem**" é um nome bonito para uma coleção de armazéns ao redor do mundo com
+- A "**nuvem**" é um nome bonito para uma coleção de armazéns ao redor do mundo com
 computadores que podem ser alugados
 
   - Um **servidor** é um computador com um programa que o permite receber
@@ -576,7 +576,7 @@ computadores que podem ser alugados
 ---
 # Testando um deploy
 
-&gt; DevOps (desenvolvimento + operações de TI) tem por objetivo acelerar o cíclo
+&gt; DevOps (desenvolvimento + operações de TI) tem por objetivo acelerar o ciclo
 de desenvolvimento e prover CD com software de alta qualidade
 
 - Depois que o deploy estiver pronto (máquina virtual rodando, configurações
@@ -809,10 +809,12 @@ CMD R -e "options('shiny.port'=80,shiny.host='0.0.0.0');exemplo::run_app()"
 ---
 # Testando o shiny
 
-- Navegar para o link correpondente ao IP: http://34.66.246.102
+- **Navegar** para o link correpondente ao IP: http://104.198.249.27
 
-  - A porta 80 é a padrão para o tráfego HTTP, então não há necessidade de
+  - A **porta 80** é a padrão para o tráfego HTTP, então não há necessidade de
   especificar nada
+
+&lt;img src="static/shiny.png" width="569" style="display: block; margin: auto;" /&gt;
 
 ---
 class: inverse, center, middle
