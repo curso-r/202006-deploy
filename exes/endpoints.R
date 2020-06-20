@@ -3,7 +3,7 @@
 #* @param mensagem Um texto
 #* @get /echo
 echo <- function(mensagem = "") {
-  paste0("A sua mensagem foi '", mensagem, "'")
+  paste0("Eu ouvi '", mensagem, "'")
 }
 
 #* Divide dois números
