@@ -40,11 +40,13 @@ knitr::include_graphics("static/cursor.png")
 
 - Alguns lembretes:
   
-  - O curso ocorre das **9:00 às 18:00**
-  
-  - Teremos uma hora de almoço entre **12:00 e 13:00** aproximadamente
+  - O curso ocorre das **9:00 às 18:00** com uma hora de **almoço**
   
   - Teremos um intervalo durante o **teste de incêndio**
+  
+  - A **gravação** do curso ficará disponível para todos por 1 ano
+  
+  - Todos se tornarão membros preferenciais no nosso **Discord**
 
 - Algumas sugestões:
   
