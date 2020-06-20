@@ -46,7 +46,7 @@ knitr::include_graphics("static/cursor.png")
   
   - A **gravação** do curso ficará disponível para todos por 1 ano
   
-  - Todos se tornarão membros preferenciais no nosso **Discord**
+  - Todos se tornarão membros preferenciais no nosso **Discourse**
 
 - Algumas sugestões:
   
